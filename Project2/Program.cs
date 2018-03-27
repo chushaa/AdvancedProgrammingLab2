@@ -12,6 +12,7 @@ namespace Project2
         static void Main(string[] args)
         {
             FileReader();
+            Console.WriteLine("The Output File has been written to your desktop.");
             Console.ReadLine();
         }
 
@@ -49,33 +50,37 @@ namespace Project2
             teamStats(superBowls);
             biggestDifference(superBowls);
             averageAttendance(superBowls);
+
         }
         public static void listOfWinners(List<SuperBowl> superbowls)
         {
             int x = 0;
             int difference = 0;
+            List<string> lines = new List<string>();
 
-            Console.WriteLine("List of all Super Bowl Winners");
-            Console.WriteLine("---------------------------------------------");
+            lines.Add("List of all Super Bowl Winners");
+            lines.Add("---------------------------------------------");
 
             while (x < superbowls.Count)
             {
-                Console.WriteLine("Winning Team: " + superbowls[x].winner);
-                Console.WriteLine("Date:" + superbowls[x].date);
-                Console.WriteLine("Winning Quarterback: " + superbowls[x].qbWinner);
-                Console.WriteLine("Winning Coach: " + superbowls[x].coachWinner);
-                Console.WriteLine("MVP: " + superbowls[x].mvp);
+                lines.Add("Winning Team: " + superbowls[x].winner);
+                lines.Add("Date:" + superbowls[x].date);
+                lines.Add("Winning Quarterback: " + superbowls[x].qbWinner);
+                lines.Add("Winning Coach: " + superbowls[x].coachWinner);
+                lines.Add("MVP: " + superbowls[x].mvp);
                 difference = superbowls[x].winningPoints - superbowls[x].losingPoints;
-                Console.WriteLine("The Difference was: " + difference);
-                Console.WriteLine();
+                lines.Add("The Difference was: " + difference);
+                lines.Add("");
                 x++;
             }
 
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("----------------------------------------------");
+            FileWriter(1, lines);
         }
         public static void topFiveAttended(List<SuperBowl> superbowls)
         {
             int x = 0;
+            List<string> lines = new List<string>();
 
             List<SuperBowl> topFive = new List<SuperBowl>();
 
@@ -124,25 +129,27 @@ namespace Project2
 
             x = 0;
 
-            Console.WriteLine("List of Top 5 Attended Super Bowls");
-            Console.WriteLine("---------------------------------------------");
+            lines.Add("List of Top 5 Attended Super Bowls");
+            lines.Add("---------------------------------------------");
             while (x < topFive.Count)
             {
-                Console.WriteLine("Date:" + topFive[x].date);
-                Console.WriteLine("Winning Team: " + topFive[x].winner);
-                Console.WriteLine("Losing Team: " + topFive[x].loser);
-                Console.WriteLine("City: " + topFive[x].city);
-                Console.WriteLine("State: " + topFive[x].state);
-                Console.WriteLine("Stadium: " + topFive[x].stadium);
-                Console.WriteLine();
+                lines.Add("Date:" + topFive[x].date);
+                lines.Add("Winning Team: " + topFive[x].winner);
+                lines.Add("Losing Team: " + topFive[x].loser);
+                lines.Add("City: " + topFive[x].city);
+                lines.Add("State: " + topFive[x].state);
+                lines.Add("Stadium: " + topFive[x].stadium);
+                lines.Add("");
                 x++;
             }
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("----------------------------------------------");
+            FileWriter(2, lines);
         }
         public static void mostHosted(List<SuperBowl> superbowls)
         {
             //Output the state that hosted the  most super bowls
             int x = 1;
+            List<string> lines = new List<string>();
 
             List<string> mostHosted = new List<string>();
             List<int> mostHostedNum = new List<int>();
@@ -176,18 +183,22 @@ namespace Project2
             }
 
 
-            Console.WriteLine("City that hosted the most Super Bowls");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("City: " + mostHostedObject[indexNum].city);
-            Console.WriteLine("State: " + mostHostedObject[indexNum].state);
-            Console.WriteLine("Stadium: " + mostHostedObject[indexNum].stadium);
-            Console.WriteLine();
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("City that hosted the most Super Bowls");
+            lines.Add("---------------------------------------------");
+            lines.Add("City: " + mostHostedObject[indexNum].city);
+            lines.Add("State: " + mostHostedObject[indexNum].state);
+            lines.Add("Stadium: " + mostHostedObject[indexNum].stadium);
+            lines.Add("");
+            lines.Add("----------------------------------------------");
+
+            FileWriter(2, lines);
 
         }
         public static void twiceMVP(List<SuperBowl> superbowls)
         {
             int x = 1;
+
+            List<string> lines = new List<string>();
 
             List<string> mvp = new List<string>();
             List<int> mvpNum = new List<int>();
@@ -196,13 +207,13 @@ namespace Project2
 
             while (x < superbowls.Count)
             {
-                if (mvp.Contains(superbowls[x].city) == true)
+                if (mvp.Contains(superbowls[x].mvp) == true)
                 {
-                    mvpNum[mvp.IndexOf(superbowls[x].city)] += 1;
+                    mvpNum[mvp.IndexOf(superbowls[x].mvp)] += 1;
                 }
                 else
                 {
-                    mvp.Add(superbowls[x].city);
+                    mvp.Add(superbowls[x].mvp);
                     mvpNum.Add(1);
                     mvpObject.Add(superbowls[x]);
                 }
@@ -222,20 +233,25 @@ namespace Project2
 
             x = 0;
 
-            Console.WriteLine("2+ time MVPs");
-            Console.WriteLine("---------------------------------------------");
+            lines.Add("2+ time MVPs");
+            lines.Add("---------------------------------------------");
 
             while (x < indexList.Count)
             {
-                Console.WriteLine(mvp[indexList[x]]);
-                Console.WriteLine();
+                lines.Add(mvp[indexList[x]]);
+                lines.Add("");
+                x++;
             }
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("----------------------------------------------");
+
+            FileWriter(2, lines);
         }
         public static void coachStats(List<SuperBowl> superbowls)
         {
             int x = 1;
 
+            List<string> lines = new List<string>();
+
             //Find Most Won
             List<string> mostWon = new List<string>();
             List<int> mostWonNum = new List<int>();
@@ -298,17 +314,21 @@ namespace Project2
             }
 
 
-            Console.WriteLine("Coach that won/lost the most");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("Won Most: " + mostWon[indexNum]);
-            Console.WriteLine("Lost Most: " + mostLost[indexNum2]);
-            Console.WriteLine();
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("Coach that won/lost the most");
+            lines.Add("---------------------------------------------");
+            lines.Add("Won Most: " + mostWon[indexNum]);
+            lines.Add("Lost Most: " + mostLost[indexNum2]);
+            lines.Add("");
+            lines.Add("----------------------------------------------");
+
+            FileWriter(2, lines);
         }
         public static void teamStats(List<SuperBowl> superbowls)
         {
             int x = 1;
 
+            List<string> lines = new List<string>();
+
             //Find Most Won
             List<string> mostWon = new List<string>();
             List<int> mostWonNum = new List<int>();
@@ -371,18 +391,22 @@ namespace Project2
             }
 
 
-            Console.WriteLine("Coach that won/lost the most");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("Won Most: " + mostWon[indexNum]);
-            Console.WriteLine("Lost Most: " + mostLost[indexNum2]);
-            Console.WriteLine();
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("Coach that won/lost the most");
+            lines.Add("---------------------------------------------");
+            lines.Add("Won Most: " + mostWon[indexNum]);
+            lines.Add("Lost Most: " + mostLost[indexNum2]);
+            lines.Add("");
+            lines.Add("----------------------------------------------");
+
+            FileWriter(2, lines);
         }
         public static void biggestDifference(List<SuperBowl> superbowls)
         {
             int x = 0;
             int difference = 0;
             int biggestDifference = 0;
+
+            List<string> lines = new List<string>();
 
             while (x < superbowls.Count)
             {
@@ -394,24 +418,53 @@ namespace Project2
                 x++;
             }
 
-            Console.WriteLine("The biggest difference was: " + difference);
-            Console.WriteLine();
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("The biggest difference was: " + difference);
+            lines.Add("");
+            lines.Add("----------------------------------------------");
+
+            FileWriter(2, lines);
         }
         public static void averageAttendance(List<SuperBowl> superbowls)
         {
             int x = 0;
             int totalAttendence = 0;
             int averageAttendence;
+            List<string> lines = new List<string>();
+
             while (x < superbowls.Count)
             {
                 totalAttendence += superbowls[x].attendence;
+                x++;
             }
 
             averageAttendence = totalAttendence / superbowls.Count;
 
-            Console.WriteLine("The average attendence was " + averageAttendence;);
-            Console.WriteLine("----------------------------------------------");
+            lines.Add("The average attendence was " + averageAttendence);
+            lines.Add("----------------------------------------------");
+
+            FileWriter(2, lines);
+        }
+        public static void FileWriter(int x, List<string> lines)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            if (x == 1)
+            {
+                using (StreamWriter outputFile = new StreamWriter(path + @"\Output.txt"))
+                {
+                    foreach (string line in lines)
+                        outputFile.WriteLine(line);
+                }
+            }
+            else
+            {
+                using (StreamWriter outputFile = new StreamWriter(path + @"\Output.txt", true))
+                {
+                    foreach (string line in lines)
+                        outputFile.WriteLine(line);
+                }
+            }
+            
         }
     }
     class SuperBowl

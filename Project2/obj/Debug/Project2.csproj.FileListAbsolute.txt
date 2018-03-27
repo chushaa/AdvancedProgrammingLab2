@@ -4,3 +4,4 @@ C:\Users\chushaa\Documents\Visual Studio 2017\Projects\Project2\Project2\bin\Deb
 C:\Users\chushaa\Documents\Visual Studio 2017\Projects\Project2\Project2\obj\Debug\Project2.csproj.CoreCompileInputs.cache
 C:\Users\chushaa\Documents\Visual Studio 2017\Projects\Project2\Project2\obj\Debug\Project2.exe
 C:\Users\chushaa\Documents\Visual Studio 2017\Projects\Project2\Project2\obj\Debug\Project2.pdb
+C:\Users\chushaa\Documents\Visual Studio 2017\Projects\Project2\Project2\obj\Debug\Project2.csprojResolveAssemblyReference.cache
